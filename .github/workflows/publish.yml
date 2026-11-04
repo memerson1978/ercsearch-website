@@ -1,0 +1,46 @@
+# Publishes the site with GitHub Pages every time main changes.
+# On the first run it copies the photos, logos and privacy policy from the current ERC Search site
+# (scripts/fetch-assets.sh) and saves them into the repository, so the repository holds everything.
+name: Publish site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Copy images from the current site (first run only)
+        if: hashFiles('img/head/home1.jpg') == ''
+        run: |
+          sh scripts/fetch-assets.sh
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add img uploads privacy-policy.pdf
+          git commit -m "Add images and privacy policy copied from the current site"
+          git push
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
