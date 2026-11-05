@@ -114,23 +114,23 @@ a:hover { color: var(--green-deep); }
 /* Client logo reels: top row runs right to left, bottom row left to right; one loop takes two minutes */
 .reel-wrap { padding-bottom: 64px; }
 .reel { display: grid; gap: 10px; max-width: 1000px; margin-inline: auto; padding-block: 18px; border-top: 1px solid #ececec; border-bottom: 1px solid #ececec; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%); }
-.reel-row { --row: 58px; height: var(--row); overflow: hidden; }
-.reel-row--bottom { --row: 46px; }
-.reel-track { display: flex; width: max-content; animation: reel-rtl 120s linear infinite; }
+.reel { --k: 1px; }
+.reel-row { --row: calc(58 * var(--k)); height: var(--row); overflow: hidden; }
+.reel-row--bottom { --row: calc(54 * var(--k)); }
+.reel-track { display: flex; align-items: center; width: max-content; height: 100%; animation: reel-rtl 120s linear infinite; }
 .reel-row--bottom .reel-track { animation-name: reel-ltr; }
 .reel-copy { display: contents; }
-.reel-strip { flex: none; width: auto; max-width: none; height: 104px; }
-.reel-row--bottom .reel-strip { margin-top: -58px; }
+.reel-cut { flex: none; overflow: hidden; height: calc(var(--cut) * var(--k)); }
+.reel-row--bottom .reel-cut { height: calc((104 - var(--cut)) * var(--k)); }
+.reel-strip { display: block; width: auto; max-width: none; height: calc(104 * var(--k)); }
+.reel-row--bottom .reel-strip { margin-top: calc(-1 * var(--cut) * var(--k)); }
 .reel-logo { flex: none; display: flex; align-items: center; justify-content: center; height: var(--row); padding-inline: 34px; }
 .reel-logo img { width: auto; max-width: none; height: var(--h); }
 .reel:hover .reel-track { animation-play-state: paused; }
 @keyframes reel-rtl { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes reel-ltr { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 @media (max-width: 640px) {
-  .reel-row { --row: 45px; }
-  .reel-row--bottom { --row: 35px; }
-  .reel-strip { height: 80px; }
-  .reel-row--bottom .reel-strip { margin-top: -45px; }
+  .reel { --k: 0.77px; }
   .reel-logo { padding-inline: 26px; }
   .reel-logo img { height: calc(var(--h) * 0.77); }
 }
