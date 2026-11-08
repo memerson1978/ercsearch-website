@@ -1,6 +1,6 @@
 # Publishes the site with GitHub Pages every time main changes.
-# On the first run it copies the photos, logos and privacy policy from the current ERC Search site
-# (scripts/fetch-assets.sh) and saves them into the repository, so the repository holds everything.
+# Each run downloads any photos, logos or documents not yet in the repository (scripts/fetch-assets.sh)
+# and saves them into it, so the repository holds everything.
 name: Publish site
 
 on:
@@ -26,15 +26,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Copy images from the current site (first run only)
-        if: hashFiles('img/head/home1.jpg') == ''
+      - name: Download any missing images and logos
         run: |
           sh scripts/fetch-assets.sh
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add img uploads privacy-policy.pdf
-          git commit -m "Add images and privacy policy copied from the current site"
-          git push
+          if ! git diff --cached --quiet; then
+            git commit -m "Add downloaded images and logos"
+            git push
+          fi
 
       - uses: actions/configure-pages@v5
 
