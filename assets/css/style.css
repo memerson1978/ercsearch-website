@@ -108,7 +108,7 @@ a:hover { color: var(--green-deep); }
 .intro h1 { margin-bottom: 12px; color: var(--ink); font-size: 30px; font-weight: 700; }
 .intro .subtitle { color: var(--green-dark); font-size: 21px; font-weight: 500; line-height: 1.4; }
 .intro .rule { width: 56px; height: 3px; margin: 26px auto 30px; background: var(--green); border: 0; }
-.intro-inner p { max-width: 780px; margin: 0 auto 16px; font-size: 17px; line-height: 1.75; }
+.intro-inner p { max-width: 980px; margin: 0 auto 16px; font-size: 17px; line-height: 1.75; }
 @media (max-width: 640px) { .intro h1 { font-size: 26px; } .intro .subtitle { font-size: 19px; } }
 
 /* Client logo reels: top row runs right to left, bottom row left to right; one loop takes two minutes */
