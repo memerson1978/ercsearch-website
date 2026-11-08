@@ -19,5 +19,4 @@ mkdir -p img/sectors img/clients
 # Client logos from their owners' websites
 [ -f "img/clients/rcs-england.png" ] || { echo "Downloading img/clients/rcs-england.png"; curl -fsSL -A "Mozilla/5.0" -o "img/clients/rcs-england.png" "https://www.rcseng.ac.uk/-/media/Images/RCS/System/royal-college-of-surgeons-of-england-logo-v2-transparent.png?h=186&w=438&la=en&hash=A118A418DB1EF248B30DFE97E32CDDAF" || { rm -f "img/clients/rcs-england.png"; echo "Could not download img/clients/rcs-england.png"; }; }
 [ -f "img/clients/mind.png" ] || { echo "Downloading img/clients/mind.png"; curl -fsSL -A "Mozilla/5.0" -o "img/clients/mind.png" "https://www.mind.org.uk/assets/images/Mind_Squiggle_Wordmark_Blue_RGB.png" || { rm -f "img/clients/mind.png"; echo "Could not download img/clients/mind.png"; }; }
-[ -f "img/clients/migso-pcubed.svg" ] || { echo "Downloading img/clients/migso-pcubed.svg"; curl -fsSL -A "Mozilla/5.0" -o "img/clients/migso-pcubed.svg" "https://www.migso-pcubed.com/wp-content/uploads/2024/06/DEF_LOGO_MP_RVB.svg" || { rm -f "img/clients/migso-pcubed.svg"; echo "Could not download img/clients/migso-pcubed.svg"; }; }
 echo "Done."
